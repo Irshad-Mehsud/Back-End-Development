@@ -1,9 +1,12 @@
 import express from 'express';
 import router from './routes/index.js'; // Adjust the import path as necessary
 import mongoose from './db/index.js'; // Import the mongoose instance
+import cors from "cors";
+
 
 const app = express();
-const PORT = 3000;
+app.use(cors());
+const PORT = 4000;
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
