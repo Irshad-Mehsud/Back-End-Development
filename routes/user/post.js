@@ -1,4 +1,5 @@
 import User from "../../models/user/index.js";
+import bcrypt from "bcrypt";
 const postUser = async (req, res) => {
     // console.log("User POST request received:", req.body);
     // res.status(200).send("User POST request processed successfully");
@@ -8,7 +9,12 @@ const postUser = async (req, res) => {
     // res.status(200).send("User POST request processed successfully");
 
     try {
-    const model = await User.create(req.body);
+
+    const password = bcrypt.hashSync(req.body.password, 10);
+    
+    const model = await User.create({
+        ...req.body,password
+    });
     res.status(201).json({
         message: "User created successfully",
         data: model
